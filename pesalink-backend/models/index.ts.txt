@@ -1,0 +1,44 @@
+// pesalink-backend/src/models/index.ts
+import User from './user.model';
+import Account from './account.model';
+import Transaction from './transaction.model';
+
+// --- Define Associations ---
+
+// User has one Account
+User.hasOne(Account, {
+  foreignKey: 'userId',
+  as: 'account',
+});
+
+// Account belongs to one User
+Account.belongsTo(User, {
+  foreignKey: 'userId',
+  as: 'user',
+});
+
+// An Account can be the sender of many Transactions
+Account.hasMany(Transaction, {
+  foreignKey: 'senderAccountId',
+  as: 'sentTransactions',
+});
+
+// An Account can be the receiver of many Transactions
+Account.hasMany(Transaction, {
+  foreignKey: 'receiverAccountId',
+  as: 'receivedTransactions',
+});
+
+// A Transaction belongs to one sender Account
+Transaction.belongsTo(Account, {
+  foreignKey: 'senderAccountId',
+  as: 'sender',
+});
+
+// A Transaction belongs to one receiver Account
+Transaction.belongsTo(Account, {
+  foreignKey: 'receiverAccountId',
+  as: 'receiver',
+});
+
+export { User, Account, Transaction };

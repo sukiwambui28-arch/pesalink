@@ -1,0 +1,25 @@
+<div class="transfer-form-container">
+  <h2>Transfer Money</h2>
+
+  <form [formGroup]="transferForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="fromAccount">From Account</label>
+      <input id="fromAccount" formControlName="fromAccount" type="text" placeholder="Enter sender account" />
+    </div>
+
+    <div class="form-group">
+      <label for="toAccount">To Account</label>
+      <input id="toAccount" formControlName="toAccount" type="text" placeholder="Enter recipient account" />
+    </div>
+
+    <div class="form-group">
+      <label for="amount">Amount</label>
+      <input id="amount" formControlName="amount" type="number" placeholder="KES" />
+    </div>
+
+    <button type="submit" [disabled]="transferForm.invalid">Send</button>
+  </form>
+
+  <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+</div>

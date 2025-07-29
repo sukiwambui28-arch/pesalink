@@ -1,0 +1,48 @@
+// Import the Angular Material theme
+@use '@angular/material' as mat;
+
+
+// Include the default theme styles.
+@include mat.core();
+
+
+// Define a custom theme.
+$pesalink-primary: mat.define-palette(mat.indigo, 700);
+$pesalink-accent: mat.define-palette(mat.pink, A200, A100, A400);
+$pesalink-theme: mat.define-light-theme((
+  color: (
+    primary: $pesalink-primary,
+    accent: $pesalink-accent,
+  )
+));
+
+
+// Apply the custom theme
+@include mat.all-component-themes($pesalink-theme);
+
+
+/* Global Styles */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f4f7fa;
+}
+
+
+/* Custom Snackbar Styles */
+.snackbar-success {
+  background-color: #4CAF50; // Green
+  color: white;
+}
+
+
+.snackbar-error {
+  background-color: #F44336; // Red
+  color: white;
+}
+
+
+.main-content {
+    padding: 24px;
+}

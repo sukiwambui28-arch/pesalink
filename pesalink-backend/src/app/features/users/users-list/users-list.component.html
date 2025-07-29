@@ -1,0 +1,27 @@
+<!-- pesalink-frontend/src/app/features/users/users-list/users-list.component.html -->
+<div class="container">
+  <h1>User List (Admin)</h1>
+
+  <!-- User Table -->
+  <table class="user-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Account Type</th>
+        <th>Account Balance (KES)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Loop through users using the async pipe -->
+      <tr *ngFor="let user of users$ | async"
+          [routerLink]="['/users', user.id]"
+          [class.low-balance]="user.account.balance < balanceThreshold">
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.account.type }}</td>
+        <td>{{ user.account.balance | currency:'KES ':'symbol':'1.2-2' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

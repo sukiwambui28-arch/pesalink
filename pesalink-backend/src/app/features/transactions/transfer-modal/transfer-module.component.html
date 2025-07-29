@@ -1,0 +1,42 @@
+<!-- pesalink-frontend/src/app/features/transactions/transfer-modal/transfer-modal.component.html -->
+<h1 mat-dialog-title>Transfer Money</h1>
+<div mat-dialog-content>
+  <form [formGroup]="transferForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Receiver Account Number</mat-label>
+      <input matInput formControlName="receiverAccountNumber" placeholder="e.g., ACC002">
+      <mat-error *ngIf="transferForm.get('receiverAccountNumber')?.hasError('required')">
+        Receiver account is required.
+      </mat-error>
+      <mat-error *ngIf="transferForm.get('receiverAccountNumber')?.hasError('pattern')">
+        Invalid account format.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Amount (KES)</mat-label>
+      <input matInput type="number" formControlName="amount" placeholder="e.g., 500">
+       <mat-error *ngIf="transferForm.get('amount')?.hasError('required')">
+        Amount is required.
+      </mat-error>
+       <mat-error *ngIf="transferForm.get('amount')?.hasError('min')">
+        Amount must be greater than 0.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Notes (Optional)</mat-label>
+      <textarea matInput formControlName="notes"></textarea>
+    </mat-form-field>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" [disabled]="transferForm.invalid || isLoading" (click)="onSubmit()">
+    {{ isLoading ? 'Sending...' : 'Send Money' }}
+  </button>
+</div>

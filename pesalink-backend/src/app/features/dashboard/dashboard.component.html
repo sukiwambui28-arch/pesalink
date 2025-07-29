@@ -1,0 +1,72 @@
+<!-- pesalink-frontend/src/app/features/dashboard/dashboard.component.html -->
+<div class="dashboard-container" *ngIf="dashboardData$ | async as data">
+  <h1>Dashboard Overview</h1>
+
+  <!-- Quick Stats Cards -->
+  <div class="stats-cards">
+    <div class="card">
+      <h3>Total Deposits</h3>
+      <p>{{ data.quickStats.totalDeposits | currency:'KES ' }}</p>
+    </div>
+    <div class="card">
+      <h3>Total Withdrawals</h3>
+      <p>{{ data.quickStats.totalWithdrawals | currency:'KES ' }}</p>
+    </div>
+    <div class="card">
+      <h3>Pending Transactions</h3>
+      <p>{{ data.quickStats.pendingTransactions }}</p>
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="main-content">
+    <!-- Spending Chart -->
+    <div class="chart-container">
+      <h2>Weekly Spending</h2>
+      <div class="chart-wrapper">
+      <canvas baseChart
+              [data]="barChartData"
+              [options]="barChartOptions"
+              [type]="barChartType">
+      </canvas>
+    </div>
+  </div>
+    <!-- dashboard.component.html -->
+
+
+    <!-- Recent Transactions -->
+    <div class="transactions-container">
+      <h2>Recent Transactions</h2>
+      <ul class="transaction-list">
+        <li *ngFor="let tx of data.recentTransactions" [ngClass]="tx.type">
+          <span class="description">{{ tx.description }}</span>
+          <span class="amount">{{ tx.amount | currency:'KES ' }}</span>
+        </li>
+      </ul>
+      <button class="action-button" (click)="openTransferModal()">Transfer Money</button>
+    </div>
+  </div>
+</div>
+<div class="dashboard-container">
+  <!-- Show spinner when isLoading is true -->
+  <div *ngIf="isLoading" class="spinner-overlay">
+    <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+  </div>
+
+
+  <!-- Show content when data is loaded -->
+  <ng-container *ngIf="dashboardData$ | async as data">
+      <!-- ... your dashboard cards and charts ... -->
+      <div class="stats-grid">
+          <mat-card class="stat-card">
+              <mat-card-header>
+                  <mat-card-title>Total Balance</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                  <h2>{{ data.totalBalance | currency:'KES' }}</h2>
+              </mat-card-content>
+          </mat-card>
+          <!-- other cards -->
+      </div>
+  </ng-container>
+</div>

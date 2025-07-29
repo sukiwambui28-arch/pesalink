@@ -1,0 +1,26 @@
+<div class="p-4">
+  <h2 class="text-2xl font-semibold mb-4">Registered Users</h2>
+
+  <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+    <thead class="bg-gray-100 border-b">
+      <tr>
+        <th class="text-left py-3 px-4">#</th>
+        <th class="text-left py-3 px-4">Full Name</th>
+        <th class="text-left py-3 px-4">Email</th>
+        <th class="text-left py-3 px-4">Account No</th>
+        <th class="text-left py-3 px-4">Balance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; let i = index" class="border-b hover:bg-gray-50">
+        <td class="py-2 px-4">{{ i + 1 }}</td>
+        <td class="py-2 px-4">{{ user.fullName }}</td>
+        <td class="py-2 px-4">{{ user.email }}</td>
+        <td class="py-2 px-4">{{ user.accountNumber }}</td>
+        <td class="py-2 px-4">KES {{ user.balance | number:'1.2-2' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="!users.length" class="mt-4 text-gray-500">No users found.</p>
+</div>
