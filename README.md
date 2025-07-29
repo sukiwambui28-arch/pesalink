@@ -109,9 +109,8 @@ ng test
 - 🧼 **Clean Codebase**: Error handling, separation of concerns, SCSS modules
 - 🔄 **State** managed via RxJS; would consider NgRx in a larger app
 
-## 📄 License
 
-MIT License (or your preferred license)
+
 
 ## 🙌 Acknowledgments
 
